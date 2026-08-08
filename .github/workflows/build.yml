@@ -1,7 +1,7 @@
 name: Build owpengram APK
 
 on:
-  workflow_dispatch: # Ручной запуск сборки кнопкой
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,10 +19,11 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Android NDK
-        uses: nalgebra/setup-ndk@v1
+      - name: Setup Android SDK & NDK
+        uses: android-actions/setup-android@v3
         with:
-          ndk-version: r25b # Оптимальная версия NDK для сборки Telegram/OwpenGram
+          cmdline-tools-version: 9.0
+          packages: 'ndk;25.2.9519653'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
